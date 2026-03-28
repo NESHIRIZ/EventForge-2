@@ -25,6 +25,7 @@ export type EventRecord = {
   date: string;
   location: string | null;
   description: string | null;
+  category: string | null;
   organizer_id: number;
   created_at: string;
 };
@@ -83,6 +84,7 @@ db.exec(`
     date TEXT NOT NULL,
     location TEXT,
     description TEXT,
+    category TEXT,
     organizer_id INTEGER NOT NULL,
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     FOREIGN KEY (organizer_id) REFERENCES users(id)
@@ -149,22 +151,22 @@ export function getPublishedOrganizerCards() {
 // ── Events ──────────────────────────────────────────────────────────────────
 
 const insertEventStmt = db.prepare(`
-  INSERT INTO events (name, date, location, description, organizer_id)
-  VALUES (?, ?, ?, ?, ?)
+  INSERT INTO events (name, date, location, description, category, organizer_id)
+  VALUES (?, ?, ?, ?, ?, ?)
 `);
 
 const selectEventByIdStmt = db.prepare(`
-  SELECT id, name, date, location, description, organizer_id, created_at
+  SELECT id, name, date, location, description, category, organizer_id, created_at
   FROM events WHERE id = ?
 `);
 
 const selectAllEventsStmt = db.prepare(`
-  SELECT id, name, date, location, description, organizer_id, created_at
+  SELECT id, name, date, location, description, category, organizer_id, created_at
   FROM events ORDER BY date ASC
 `);
 
 const selectEventsByOrganizerStmt = db.prepare(`
-  SELECT id, name, date, location, description, organizer_id, created_at
+  SELECT id, name, date, location, description, category, organizer_id, created_at
   FROM events WHERE organizer_id = ? ORDER BY date ASC
 `);
 
@@ -173,6 +175,7 @@ export function createEvent(input: {
   date: string;
   location?: string;
   description?: string;
+  category?: string;
   organizer_id: number;
 }) {
   const result = insertEventStmt.run(
@@ -180,6 +183,7 @@ export function createEvent(input: {
     input.date,
     input.location ?? null,
     input.description ?? null,
+    input.category ?? null,
     input.organizer_id
   );
   return Number(result.lastInsertRowid);
@@ -198,7 +202,7 @@ export function getEventsByOrganizer(organizerId: number) {
 }
 
 const updateEventStmt = db.prepare(`
-  UPDATE events SET name = ?, date = ?, location = ?, description = ?
+  UPDATE events SET name = ?, date = ?, location = ?, description = ?, category = ?
   WHERE id = ?
 `);
 
@@ -212,13 +216,14 @@ const deleteGuestsByEventStmt = db.prepare(`
 
 export function updateEvent(
   id: number,
-  input: { name: string; date: string; location?: string; description?: string }
+  input: { name: string; date: string; location?: string; description?: string; category?: string }
 ) {
   updateEventStmt.run(
     input.name,
     input.date,
     input.location ?? null,
     input.description ?? null,
+    input.category ?? null,
     id
   );
 }

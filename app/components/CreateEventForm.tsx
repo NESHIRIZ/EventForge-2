@@ -8,10 +8,11 @@ interface CreateEventFormProps{
 
 export default function CreateEventForm({ userId }: CreateEventFormProps) {
   const [form, setForm] = useState({
-    title: "",
+    name: "",
     description: "",
     location: "",
     date: "",
+    category: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -28,15 +29,24 @@ export default function CreateEventForm({ userId }: CreateEventFormProps) {
 
     if (res.ok) {
       alert("Event created!");
-      setForm({ title: "", description: "", location: "", date: "" });
+      setForm({ name: "", description: "", location: "", date: "", category: "" });
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      <input name="title" placeholder="Title" onChange={handleChange} value={form.title} required />
+      <input name="name" placeholder="Event Name" onChange={handleChange} value={form.name} required />
       <input name="location" placeholder="Location" onChange={handleChange} value={form.location} />
       <input type="datetime-local" name="date" onChange={handleChange} value={form.date} required />
+      <select name="category" onChange={handleChange} value={form.category}>
+        <option value="">Select Category (Optional)</option>
+        <option value="conference">Conference</option>
+        <option value="workshop">Workshop</option>
+        <option value="social">Social</option>
+        <option value="corporate">Corporate</option>
+        <option value="educational">Educational</option>
+        <option value="entertainment">Entertainment</option>
+      </select>
       <textarea name="description" placeholder="Description" onChange={handleChange} value={form.description} />
       
       <button type="submit">Create Event</button>

@@ -103,6 +103,7 @@ export default async function EventsPage({
                       })}
                     </span>
                     {event.location && <span>{"Location: "}{event.location}</span>}
+                    {event.category && <span className="capitalize">{"Category: "}{event.category}</span>}
                   </div>
                   {event.description && (
                     <p className="mt-3 text-sm text-muted-foreground line-clamp-2">

@@ -55,6 +55,7 @@ export default async function EventDetailPage({
             <div className="mt-3 flex flex-wrap gap-4 text-sm text-muted-foreground">
               <span>📅 {formattedDate}</span>
               {event.location && <span>📍 {event.location}</span>}
+              {event.category && <span className="capitalize">🏷️ {event.category}</span>}
             </div>
             {event.description && (
               <p className="mt-4 text-sm leading-6 text-muted-foreground md:text-base">

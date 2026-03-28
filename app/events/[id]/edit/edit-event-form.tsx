@@ -9,6 +9,7 @@ type Props = {
   initialDate: string;
   initialLocation: string;
   initialDescription: string;
+  initialCategory?: string;
 };
 
 export function EditEventForm({
@@ -17,12 +18,14 @@ export function EditEventForm({
   initialDate,
   initialLocation,
   initialDescription,
+  initialCategory,
 }: Props) {
   const router = useRouter();
   const [name, setName] = useState(initialName);
   const [date, setDate] = useState(initialDate);
   const [location, setLocation] = useState(initialLocation);
   const [description, setDescription] = useState(initialDescription);
+  const [category, setCategory] = useState(initialCategory || "");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -37,7 +40,7 @@ export function EditEventForm({
       const res = await fetch(`/api/events/${eventId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, date, location, description }),
+        body: JSON.stringify({ name, date, location, description, category }),
       });
 
       const data = (await res.json()) as { error?: string };
@@ -96,6 +99,26 @@ export function EditEventForm({
           onChange={(e) => setLocation(e.target.value)}
           className="h-10 rounded-lg border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
         />
+      </div>
+
+      <div className="grid gap-1.5">
+        <label htmlFor="event-category" className="text-sm font-medium">
+          Category
+        </label>
+        <select
+          id="event-category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="h-10 rounded-lg border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+        >
+          <option value="">Select Category (Optional)</option>
+          <option value="conference">Conference</option>
+          <option value="workshop">Workshop</option>
+          <option value="social">Social</option>
+          <option value="corporate">Corporate</option>
+          <option value="educational">Educational</option>
+          <option value="entertainment">Entertainment</option>
+        </select>
       </div>
 
       <div className="grid gap-1.5">

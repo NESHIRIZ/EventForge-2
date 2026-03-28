@@ -56,6 +56,7 @@ export default async function EditEventPage({
               initialDate={event.date}
               initialLocation={event.location ?? ""}
               initialDescription={event.description ?? ""}
+              initialCategory={event.category ?? ""}
             />
           </div>
         </div>

@@ -40,7 +40,7 @@ export async function PUT(
   }
 
   const body = await request.json();
-  const { name, date, location, description } = body as Record<string, string>;
+  const { name, date, location, description, category } = body as Record<string, string>;
 
   if (!name?.trim() || !date?.trim()) {
     return NextResponse.json(
@@ -54,6 +54,7 @@ export async function PUT(
     date: date.trim(),
     location: location?.trim() || undefined,
     description: description?.trim() || undefined,
+    category: category?.trim() || undefined,
   });
 
   return NextResponse.json({ success: true });

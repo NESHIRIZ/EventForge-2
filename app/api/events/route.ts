@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { name, date, location, description } = body as Record<string, string>;
+  const { name, date, location, description, category } = body as Record<string, string>;
 
   if (!name?.trim() || !date?.trim()) {
     return NextResponse.json(
@@ -44,6 +44,7 @@ export async function POST(request: NextRequest) {
     date: date.trim(),
     location: location?.trim() || undefined,
     description: description?.trim() || undefined,
+    category: category?.trim() || undefined,
     organizer_id: payload.sub,
   });
 

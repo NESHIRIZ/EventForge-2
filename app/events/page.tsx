@@ -84,11 +84,11 @@ export default async function EventsPage({
             </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {events.map((event) => (
+              {events.map((event, index) => (
                 <Link
                   key={event.id}
                   href={`/events/${event.id}`}
-                  className="group rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:border-primary/50 hover:shadow-md"
+                  className={`group animate-fade-in-up rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:border-primary/50 hover:shadow-md hover:scale-105 animate-delay-${(index % 6 + 1) * 100}`}
                 >
                   <h2 className="font-heading text-lg font-semibold tracking-tight group-hover:text-primary">
                     {event.name}

@@ -36,16 +36,16 @@ function BenefitList({
   points: readonly string[];
 }) {
   return (
-    <article className="rounded-3xl border border-border bg-card p-6 shadow-md md:p-8">
+    <article className="animate-fade-in-up rounded-3xl border border-border bg-card p-6 shadow-md transition hover:shadow-lg hover:scale-105 md:p-8">
       <h3 className="font-heading text-xl font-semibold tracking-tight text-secondary">
         {title}
       </h3>
       <ul className="mt-5 space-y-3 text-sm text-muted-foreground md:text-base">
-        {points.map((point) => (
-          <li key={point} className="flex items-start gap-3">
+        {points.map((point, index) => (
+          <li key={point} className={`flex items-start gap-3 animate-slide-in-left animate-delay-${(index + 1) * 100}`}>
             <span
               aria-hidden="true"
-              className="mt-1 h-3 w-3 rounded-full bg-primary"
+              className="mt-1 h-3 w-3 animate-bounce-in rounded-full bg-primary"
             />
             <span>{point}</span>
           </li>
@@ -64,25 +64,25 @@ export default function Home() {
         </div>
         <Container>
           <div className="relative z-10 py-24 text-center md:py-28">
-            <p className="mb-4 inline-flex rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+            <p className="mb-4 inline-flex animate-fade-in rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               Launching a pro events experience
             </p>
-            <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
+            <h1 className="mx-auto mt-6 max-w-3xl animate-fade-in-up text-4xl font-bold leading-tight md:text-6xl">
               Event management that looks premium and works lightning-fast.
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/90 md:text-lg">
+            <p className="mx-auto mt-6 max-w-2xl animate-fade-in-up animate-delay-200 text-base leading-relaxed text-white/90 md:text-lg">
               Build high-impact event pages, optimize attendee conversion, and run every event with a polished workflow that keeps attendees coming back.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-8 flex animate-fade-in-up animate-delay-400 flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
                 href="/events"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-white px-8 text-sm font-semibold text-slate-900 shadow-lg shadow-teal-300/40 transition hover:brightness-110"
+                className="inline-flex h-12 animate-bounce-in animate-delay-500 items-center justify-center rounded-full bg-white px-8 text-sm font-semibold text-slate-900 shadow-lg shadow-teal-300/40 transition hover:brightness-110 hover:scale-105"
               >
                 Explore events
               </Link>
               <Link
                 href="/organizers"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-white/60 bg-white/10 px-8 text-sm font-semibold text-white transition hover:bg-white/20"
+                className="inline-flex h-12 animate-fade-in animate-delay-600 items-center justify-center rounded-full border border-white/60 bg-white/10 px-8 text-sm font-semibold text-white transition hover:bg-white/20 hover:scale-105"
               >
                 Launch your event
               </Link>
@@ -94,34 +94,40 @@ export default function Home() {
       <section className="border-b border-border/50 bg-background py-16 md:py-20">
         <Container>
           <div className="mx-auto mb-8 max-w-4xl text-center">
-            <h2 className="font-heading text-3xl font-bold leading-tight md:text-4xl">
+            <h2 className="animate-fade-in-up font-heading text-3xl font-bold leading-tight md:text-4xl">
               A complete event platform in one polished workspace
             </h2>
-            <p className="mt-4 text-base text-muted-foreground md:text-lg">
+            <p className="animate-fade-in-up animate-delay-200 mt-4 text-base text-muted-foreground md:text-lg">
               EventForge combines discovery, attendee experience, and organizer operations into a single modern dashboard with enterprise-ready controls.
             </p>
           </div>
 
           <div className="grid gap-5 md:grid-cols-3">
-            <BenefitList title="Attendees" points={attendeePoints} />
-            <BenefitList title="Organizers" points={organizerPoints} />
-            <article className="rounded-3xl border border-border bg-card p-6 shadow-md md:p-8">
-              <h3 className="font-heading text-xl font-semibold tracking-tight text-secondary">Why EventForge</h3>
-              <ul className="mt-5 space-y-3 text-sm text-muted-foreground md:text-base">
-                <li className="flex items-start gap-3">
-                  <span aria-hidden="true" className="mt-1 h-3 w-3 rounded-full bg-primary" />
-                  Smoother event creation, from RSVP settings to attendee limits.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span aria-hidden="true" className="mt-1 h-3 w-3 rounded-full bg-primary" />
-                  Integrated guest tracking, waitlists, and real-time status updates.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span aria-hidden="true" className="mt-1 h-3 w-3 rounded-full bg-primary" />
-                  Fully responsive experience built for desktop and mobile in one deploy.
-                </li>
-              </ul>
-            </article>
+            <div className="animate-slide-in-left">
+              <BenefitList title="Attendees" points={attendeePoints} />
+            </div>
+            <div className="animate-fade-in-up animate-delay-200">
+              <BenefitList title="Organizers" points={organizerPoints} />
+            </div>
+            <div className="animate-slide-in-right">
+              <article className="rounded-3xl border border-border bg-card p-6 shadow-md transition hover:shadow-lg hover:scale-105 md:p-8">
+                <h3 className="font-heading text-xl font-semibold tracking-tight text-secondary">Why EventForge</h3>
+                <ul className="mt-5 space-y-3 text-sm text-muted-foreground md:text-base">
+                  <li className="flex items-start gap-3">
+                    <span aria-hidden="true" className="mt-1 h-3 w-3 rounded-full bg-primary" />
+                    Smoother event creation, from RSVP settings to attendee limits.
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span aria-hidden="true" className="mt-1 h-3 w-3 rounded-full bg-primary" />
+                    Integrated guest tracking, waitlists, and real-time status updates.
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span aria-hidden="true" className="mt-1 h-3 w-3 rounded-full bg-primary" />
+                    Fully responsive experience built for desktop and mobile in one deploy.
+                  </li>
+                </ul>
+              </article>
+            </div>
           </div>
         </Container>
       </section>
@@ -130,8 +136,8 @@ export default function Home() {
         <Container>
           <div className="mx-auto max-w-5xl">
             <div className="mb-8 text-center">
-              <h2 className="font-heading text-3xl font-bold md:text-4xl">See it live</h2>
-              <p className="mt-3 text-muted-foreground">
+              <h2 className="animate-fade-in-up font-heading text-3xl font-bold md:text-4xl">See it live</h2>
+              <p className="animate-fade-in-up animate-delay-200 mt-3 text-muted-foreground">
                 Preview your events and attendee pipelines with actionable analytics at a glance.
               </p>
             </div>
@@ -152,8 +158,8 @@ export default function Home() {
                   value: "+48%",
                   desc: "Goal completion vs time invested",
                 },
-              ].map((item) => (
-                <article key={item.title} className="rounded-2xl border border-border bg-card p-5 shadow-sm md:p-6">
+              ].map((item, index) => (
+                <article key={item.title} className={`animate-fade-in-up animate-delay-${(index + 1) * 200} rounded-2xl border border-border bg-card p-5 shadow-sm transition hover:shadow-lg hover:scale-105 md:p-6`}>
                   <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{item.title}</h3>
                   <p className="mt-3 text-3xl font-bold text-foreground">{item.value}</p>
                   <p className="mt-2 text-sm text-muted-foreground">{item.desc}</p>
@@ -167,16 +173,16 @@ export default function Home() {
       <section id="faq" className="border-t border-border/70 bg-background py-16 md:py-20">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-heading text-3xl font-bold md:text-4xl">Common Questions</h2>
-            <p className="mt-3 text-muted-foreground">
+            <h2 className="animate-fade-in-up font-heading text-3xl font-bold md:text-4xl">Common Questions</h2>
+            <p className="animate-fade-in-up animate-delay-200 mt-3 text-muted-foreground">
               Everything you need to know before launching your first event.
             </p>
           </div>
           <div className="mt-8 grid gap-4">
-            {faqItems.map((item) => (
+            {faqItems.map((item, index) => (
               <details
                 key={item.q}
-                className="rounded-2xl border border-border bg-card p-5"
+                className={`animate-fade-in-up animate-delay-${(index + 1) * 100} rounded-2xl border border-border bg-card p-5 transition hover:shadow-md`}
               >
                 <summary className="cursor-pointer text-base font-semibold">
                   {item.q}

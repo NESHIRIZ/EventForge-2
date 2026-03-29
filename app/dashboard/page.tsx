@@ -45,7 +45,7 @@ export default async function DashboardPage({
     <main className="py-14 md:py-20">
       <Container>
         <div className="mx-auto grid max-w-3xl gap-6">
-          <header className="rounded-2xl border border-border bg-card p-6 md:p-8">
+          <header className="animate-fade-in-up rounded-2xl border border-border bg-card p-6 md:p-8">
             <p className="text-sm font-semibold text-primary">Dashboard</p>
             <h1 className="mt-2 font-heading text-3xl font-semibold tracking-tight md:text-4xl">
               Welcome, {user.name}
@@ -53,12 +53,12 @@ export default async function DashboardPage({
             <p className="mt-2 text-sm text-muted-foreground md:text-base">
               Signed in as {user.email}.
             </p>
-            <p className="mt-4 inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+            <p className="mt-4 inline-flex animate-bounce-in animate-delay-200 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
               {isOrganizer ? "Organizer view" : "Attendee view"}
             </p>
           </header>
 
-          <section className="rounded-2xl border border-border bg-card p-6 md:p-8">
+          <section className="animate-fade-in-up animate-delay-300 rounded-2xl border border-border bg-card p-6 md:p-8">
             <h2 className="font-heading text-xl font-semibold tracking-tight">
               Your activity
             </h2>
@@ -71,13 +71,13 @@ export default async function DashboardPage({
                 <>
                   <Link
                     href="/organizers"
-                    className="inline-flex h-10 items-center justify-center rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground transition hover:brightness-95"
+                    className="inline-flex h-10 items-center justify-center rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground transition hover:brightness-95 hover:scale-105"
                   >
                     Review organizer workflow
                   </Link>
                   <Link
                     href={eventsHref}
-                    className="inline-flex h-10 items-center justify-center rounded-full border border-border bg-background px-4 text-sm font-semibold transition hover:bg-muted"
+                    className="inline-flex h-10 items-center justify-center rounded-full border border-border bg-background px-4 text-sm font-semibold transition hover:bg-muted hover:scale-105"
                   >
                     Preview event listings
                   </Link>
@@ -86,13 +86,13 @@ export default async function DashboardPage({
                 <>
                   <Link
                     href={eventsHref}
-                    className="inline-flex h-10 items-center justify-center rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground transition hover:brightness-95"
+                    className="inline-flex h-10 items-center justify-center rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground transition hover:brightness-95 hover:scale-105"
                   >
                     Browse events
                   </Link>
                   <Link
                     href="/organizers"
-                    className="inline-flex h-10 items-center justify-center rounded-full border border-border bg-background px-4 text-sm font-semibold transition hover:bg-muted"
+                    className="inline-flex h-10 items-center justify-center rounded-full border border-border bg-background px-4 text-sm font-semibold transition hover:bg-muted hover:scale-105"
                   >
                     Learn organizer tools
                   </Link>

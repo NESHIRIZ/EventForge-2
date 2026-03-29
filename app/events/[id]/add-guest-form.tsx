@@ -29,10 +29,7 @@ export function AddGuestForm({ eventId }: { eventId: number }) {
       if (!res.ok) {
         setError(data.error ?? "Failed to add guest. Please try again.");
       } else {
-        setSuccess(true);
-        setName("");
-        setEmail("");
-        router.refresh();
+        router.push("/thank-you");
       }
     } catch {
       setError("Something went wrong. Please try again.");

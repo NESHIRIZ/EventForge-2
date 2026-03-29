@@ -45,7 +45,6 @@ const dbPath = process.env.SQLITE_DB_PATH
 
 // Preserve DB instance across hot reloads in development
 declare global {
-  // eslint-disable-next-line no-var
   var __eventhiveDb: DatabaseSync | undefined;
 }
 

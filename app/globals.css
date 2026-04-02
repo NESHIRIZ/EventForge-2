@@ -1,27 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  /* EventForge "Forge" theme (light) */
-  --background: #fdf6f0; /* soft cream */
-  --foreground: #1f2937; /* slate-800 */
+  /* EventForge "Premium" theme (light) */
+  --background: #fafbfc; /* ultra-light neutral */
+  --foreground: #0f1419; /* almost black */
 
   --card: #ffffff;
-  --card-foreground: #1f2937;
+  --card-foreground: #0f1419;
 
-  --muted: #fff1e6; /* light peach */
-  --muted-foreground: #475569; /* slate-600 */
+  --muted: #f3f4f6; /* light gray */
+  --muted-foreground: #4b5563; /* slate-600 */
 
-  --primary: #7c3aed; /* violet-600 */
+  --primary: #6366f1; /* indigo-600 */
   --primary-foreground: #ffffff;
 
-  --secondary: #d946ef; /* fuchsia-500 */
+  --secondary: #ec4899; /* pink-500 */
   --secondary-foreground: #ffffff;
 
-  --border: #e2e8f0; /* slate-200 */
-  --input: #e2e8f0;
-  --ring: #2dd4bf; /* teal-400 */
+  --border: #e5e7eb; /* gray-200 */
+  --input: #e5e7eb;
+  --ring: #06b6d4; /* cyan-500 */
+  --success: #10b981; /* emerald-500 */
+  --warning: #f59e0b; /* amber-500 */
+  --error: #ef4444; /* red-500 */
 
-  --radius: 0.85rem;
+  --radius: 0.875rem;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 @theme inline {
@@ -48,7 +55,25 @@
   --font-mono: var(--font-mono);
 }
 
-/* Custom animations for EventForge */
+/* Enhanced color utilities */
+.bg-gradient-primary {
+  background: linear-gradient(to right, #4f46e5, #ec4899);
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(to bottom right, #06b6d4, #4f46e5);
+}
+
+.text-gradient-primary {
+  background: linear-gradient(to right, #4f46e5, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom animations for EventForge - Premium Edition */
+
+/* Entrance animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -91,6 +116,18 @@
   }
 }
 
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale and bounce animations */
 @keyframes bounceIn {
   0% {
     opacity: 0;
@@ -109,12 +146,24 @@
   }
 }
 
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Float and motion animations */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
   }
 }
 
@@ -127,6 +176,43 @@
   }
 }
 
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tilt {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+/* Apply animation classes */
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
 }
@@ -143,20 +229,46 @@
   animation: slideInRight 0.8s ease-out forwards;
 }
 
+.animate-slide-in-down {
+  animation: slideInDown 0.8s ease-out forwards;
+}
+
 .animate-bounce-in {
   animation: bounceIn 0.8s ease-out forwards;
 }
 
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
 }
 
 .animate-pulse-custom {
   animation: pulse 2s ease-in-out infinite;
 }
 
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-rotate {
+  animation: rotate 20s linear infinite;
+}
+
+.animate-tilt {
+  animation: tilt 3s ease-in-out infinite;
+}
+
 /* Staggered animation delays */
+.animate-delay-50 { animation-delay: 0.05s; }
 .animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-150 { animation-delay: 0.15s; }
 .animate-delay-200 { animation-delay: 0.2s; }
 .animate-delay-300 { animation-delay: 0.3s; }
 .animate-delay-400 { animation-delay: 0.4s; }
@@ -164,28 +276,96 @@
 .animate-delay-600 { animation-delay: 0.6s; }
 .animate-delay-700 { animation-delay: 0.7s; }
 .animate-delay-800 { animation-delay: 0.8s; }
+.animate-delay-1000 { animation-delay: 1s; }
+
+/* Premium utility classes */
+.glass-effect {
+  background-color: rgb(255 255 255 / 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgb(255 255 255 / 0.2);
+}
+
+.dark .glass-effect {
+  background-color: rgb(15 23 42 / 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgb(51 65 85 / 0.1);
+}
+
+.card-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(99, 102, 241, 0.05);
+}
+
+.card-shadow-lg {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(99, 102, 241, 0.1);
+}
+
+.card-shadow-hover {
+  transition: box-shadow 0.3s ease-out;
+}
+
+.card-shadow-hover:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(99, 102, 241, 0.15);
+}
+
+.btn-glow {
+  position: relative;
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 9999px;
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.3));
+  filter: blur(32px);
+  inset: -2px;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.btn-glow:hover::before {
+  opacity: 1;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.3s ease-out;
+}
+
+.transition-smooth-lg {
+  transition: all 0.5s ease-out;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* EventHive "Aurora" theme (dark) */
-    --background: #070b14; /* deep navy */
-    --foreground: #e5e7eb; /* zinc-200 */
+    /* EventHive "Aurora" theme (dark) - Enhanced */
+    --background: #0a0e1a; /* premium deep navy */
+    --foreground: #e8eaed; /* light gray */
 
-    --card: #0b1220;
-    --card-foreground: #e5e7eb;
+    --card: #131824; /* slightly lighter navy */
+    --card-foreground: #e8eaed;
 
-    --muted: #0f172a;
-    --muted-foreground: #94a3b8; /* slate-400 */
+    --muted: #0f141f;
+    --muted-foreground: #8b92a1; /* slate-400 */
 
-    --primary: #c084fc; /* violet-300 */
-    --primary-foreground: #0b0a1e;
+    --primary: #a78bfa; /* violet-300 */
+    --primary-foreground: #0a0e1a;
 
-    --secondary: #ec4899; /* pink-500 */
-    --secondary-foreground: #0b0a1e;
+    --secondary: #f472b6; /* pink-400 */
+    --secondary-foreground: #0a0e1a;
 
-    --border: #1f2a44;
-    --input: #1f2a44;
-    --ring: #5eead4;
+    --border: #1e293b;
+    --input: #1e293b;
+    --ring: #22d3ee; /* cyan-300 */
+  }
+
+  .glass-effect {
+    @apply bg-slate-900/50;
   }
 }
 
@@ -194,6 +374,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  transition: background-color 0.3s ease;
 }
 
 @layer base {
@@ -208,7 +389,90 @@ body {
     letter-spacing: -0.02em;
   }
 
+  h1 {
+    @apply text-4xl md:text-5xl font-bold tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold tracking-tight;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-semibold tracking-tight;
+  }
+
   a {
     text-underline-offset: 4px;
+    transition: color 0.3s ease-out;
+  }
+
+  button, input, textarea, select {
+    transition: all 0.3s ease-out;
+  }
+}
+
+/* Enhanced form styling */
+@layer base {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  input[type="search"],
+  textarea,
+  select {
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    padding: 0.75rem;
+    color: var(--foreground);
+    outline: none;
+    transition: all 0.3s ease-out;
+  }
+
+  input[type="text"]::placeholder,
+  input[type="email"]::placeholder,
+  input[type="password"]::placeholder,
+  input[type="number"]::placeholder,
+  input[type="date"]::placeholder,
+  input[type="datetime-local"]::placeholder,
+  input[type="month"]::placeholder,
+  input[type="time"]::placeholder,
+  input[type="week"]::placeholder,
+  input[type="search"]::placeholder,
+  textarea::placeholder,
+  select::placeholder {
+    color: var(--muted-foreground);
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  input[type="datetime-local"]:focus,
+  input[type="month"]:focus,
+  input[type="time"]:focus,
+  input[type="week"]:focus,
+  input[type="search"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.1);
+  }
+
+  input:disabled,
+  textarea:disabled,
+  select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  button {
+    transition: all 0.3s ease-out;
   }
 }

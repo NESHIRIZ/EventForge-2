@@ -20,26 +20,41 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://eventforge.app"),
+  metadataBase: new URL("https://eventhive.app"),
   title: {
-    default: "EventForge",
-    template: "%s | EventForge",
+    default: "EventHive — Premium Event Management Platform",
+    template: "%s | EventHive",
   },
-  description: "Forge experiences, grow communities, and run events that leave a mark.",
+  description: "Create stunning events, manage attendees effortlessly, and grow your community with EventHive's all-in-one platform. Free to start, powerful to scale.",
+  keywords: ["events", "event management", "RSVP", "attendee management", "event hosting"],
   alternates: {
     canonical: "/",
   },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
-    title: "EventForge",
-    description: "Forge experiences, grow communities, and run events that leave a mark.",
-    url: "https://eventforge.app",
-    siteName: "EventForge",
+    title: "EventHive — Premium Event Management Platform",
+    description: "Create stunning events, manage attendees effortlessly, and grow your community with EventHive.",
+    url: "https://eventhive.app",
+    siteName: "EventHive",
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "EventForge",
-    description: "Forge experiences, grow communities, and run events that leave a mark.",
+    title: "EventHive — Premium Event Management Platform",
+    description: "Create stunning events, manage attendees effortlessly, and grow your community with EventHive.",
+    creator: "@eventhive",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -49,9 +64,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <meta name="theme-color" content="#6366f1" />
+      </head>
       <body
-        className={`${inter.variable} ${outfit.variable} ${geistMono.variable} min-h-dvh bg-background text-foreground antialiased`}
+        className={`${inter.variable} ${outfit.variable} ${geistMono.variable} min-h-dvh bg-background text-foreground antialiased transition-smooth`}
       >
         <SiteHeader />
         {children}

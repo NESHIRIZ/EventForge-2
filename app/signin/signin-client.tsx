@@ -121,95 +121,122 @@ export function SigninClient() {
   }
 
   return (
-    <div className="mx-auto max-w-lg rounded-2xl border border-border bg-card p-6 md:p-8">
-      <h1 className="font-heading text-3xl font-semibold tracking-tight">
-        Sign in
-      </h1>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Access your account and events securely.
-      </p>
+    <div className="relative z-10 mx-auto w-full max-w-md animate-fade-in-up">
+      {/* Card */}
+      <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-card/80 p-8 shadow-xl overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 hover:opacity-100 transition-opacity duration-500" />
+        
+        <div className="relative z-10">
+          <h1 className="font-heading text-4xl font-black tracking-tight text-gradient-primary">
+            Welcome back
+          </h1>
+          <p className="mt-3 text-base text-muted-foreground">
+            Sign in to your EventHive account and continue creating.
+          </p>
 
-      {showRegisteredNotice ? (
-        <p className="mt-4 rounded-lg bg-emerald-500/10 px-3 py-2 text-sm text-emerald-700">
-          Account created. Please sign in.
-        </p>
-      ) : null}
+          {showRegisteredNotice ? (
+            <div className="mt-6 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-700 flex items-center gap-2">
+              <span>✓</span>
+              Account created! Please sign in to continue.
+            </div>
+          ) : null}
 
-      <div className="mt-6 space-y-4">
-        <button
-          type="button"
-          onClick={handleGoogleSignin}
-          disabled={submitting || oauthSubmitting}
-          className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-semibold transition hover:bg-muted disabled:opacity-70"
-        >
-          <GoogleIcon className="h-5 w-5" />
-          {oauthSubmitting ? "Connecting..." : "Continue with Google"}
-        </button>
+          <div className="mt-8 space-y-4">
+            {/* Google Sign In */}
+            <button
+              type="button"
+              onClick={handleGoogleSignin}
+              disabled={submitting || oauthSubmitting}
+              className="group inline-flex h-12 w-full items-center justify-center gap-3 rounded-lg border border-border bg-background hover:border-primary/50 hover:bg-primary/5 px-4 text-sm font-bold transition disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              <GoogleIcon className="h-5 w-5" />
+              {oauthSubmitting ? "Connecting..." : "Continue with Google"}
+            </button>
 
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center" aria-hidden="true">
-            <div className="w-full border-t border-border" />
+            {/* Divider */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <div className="w-full border-t border-border/50" />
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-card px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  Or
+                </span>
+              </div>
+            </div>
+
+            {/* Email/Password Form */}
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <label className="block space-y-2">
+                <span className="text-sm font-bold uppercase tracking-wide text-foreground">Email Address</span>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                  className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm placeholder-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+              </label>
+
+              <label className="block space-y-2">
+                <span className="text-sm font-bold uppercase tracking-wide text-foreground">Password</span>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="••••••••"
+                  required
+                  className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm placeholder-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+              </label>
+
+              <button
+                type="submit"
+                disabled={submitting || oauthSubmitting}
+                className="group inline-flex h-12 w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-pink-500 text-base font-bold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed disabled:scale-100"
+              >
+                {submitting ? (
+                  <>
+                    <span className="inline-block animate-spin mr-2">⚙️</span>
+                    Signing in...
+                  </>
+                ) : (
+                  "Sign In"
+                )}
+              </button>
+            </form>
           </div>
-          <div className="relative flex justify-center">
-            <span className="bg-card px-2 text-xs text-muted-foreground">or</span>
-          </div>
+
+          {/* Status Messages */}
+          {sessionUser ? (
+            <div className="mt-6 rounded-lg border border-blue-500/30 bg-blue-500/10 px-4 py-3 text-sm font-medium text-blue-700 flex items-center gap-2">
+              <span>✓</span>
+              Signed in as {sessionUser.name}
+            </div>
+          ) : null}
+
+          {message ? (
+            <div className="mt-6 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-700 flex items-center gap-2">
+              <span>✓</span>
+              {message}
+            </div>
+          ) : null}
+
+          {error ? (
+            <div className="mt-6 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-700 flex items-start gap-2">
+              <span className="mt-0.5">⚠</span>
+              <span>{error}</span>
+            </div>
+          ) : null}
+
+          {/* Sign Up Link */}
+          <p className="mt-8 text-center text-sm text-muted-foreground">
+            Don't have an account?{" "}
+            <Link href="/signup" className="font-bold text-primary hover:text-primary/80 transition-colors">
+              Create one for free
+            </Link>
+          </p>
         </div>
-
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <label className="block space-y-2">
-            <span className="text-sm font-medium">Email</span>
-            <input
-              type="email"
-              name="email"
-              required
-              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
-            />
-          </label>
-
-          <label className="block space-y-2">
-            <span className="text-sm font-medium">Password</span>
-            <input
-              type="password"
-              name="password"
-              required
-              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
-            />
-          </label>
-
-          <button
-            type="submit"
-            disabled={submitting || oauthSubmitting}
-            className="inline-flex h-10 items-center rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground disabled:opacity-70"
-          >
-            {submitting ? "Signing in..." : "Sign in"}
-          </button>
-        </form>
       </div>
-
-      {sessionUser ? (
-        <p className="mt-4 rounded-lg bg-blue-500/10 px-3 py-2 text-sm text-blue-700">
-          Signed in as {sessionUser.name} ({sessionUser.email}).
-        </p>
-      ) : null}
-
-      {message ? (
-        <p className="mt-4 rounded-lg bg-emerald-500/10 px-3 py-2 text-sm text-emerald-700">
-          {message}
-        </p>
-      ) : null}
-
-      {error ? (
-        <p className="mt-4 rounded-lg bg-rose-500/10 px-3 py-2 text-sm text-rose-700">
-          {error}
-        </p>
-      ) : null}
-
-      <p className="mt-6 text-sm text-muted-foreground">
-        Need an account?{" "}
-        <Link href="/signup" className="font-medium text-primary">
-          Create one
-        </Link>
-      </p>
     </div>
   );
 }

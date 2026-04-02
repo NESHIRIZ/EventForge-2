@@ -36,21 +36,24 @@ function BenefitList({
   points: readonly string[];
 }) {
   return (
-    <article className="animate-fade-in-up rounded-3xl border border-border bg-card p-6 shadow-md transition hover:shadow-lg hover:scale-105 md:p-8">
-      <h3 className="font-heading text-xl font-semibold tracking-tight text-secondary">
-        {title}
-      </h3>
-      <ul className="mt-5 space-y-3 text-sm text-muted-foreground md:text-base">
-        {points.map((point, index) => (
-          <li key={point} className={`flex items-start gap-3 animate-slide-in-left animate-delay-${(index + 1) * 100}`}>
-            <span
-              aria-hidden="true"
-              className="mt-1 h-3 w-3 animate-bounce-in rounded-full bg-primary"
-            />
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
+    <article className="group animate-fade-in-up rounded-2xl border border-border bg-gradient-to-br from-card to-card/80 p-6 shadow-lg card-shadow-hover transition-all md:p-8 overflow-hidden relative">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative z-10">
+        <h3 className="font-heading text-xl font-bold tracking-tight text-gradient-primary">
+          {title}
+        </h3>
+        <ul className="mt-6 space-y-4 text-sm text-muted-foreground md:text-base">
+          {points.map((point, index) => (
+            <li key={point} className={`flex items-start gap-3 animate-slide-in-left animate-delay-${(index + 1) * 100}`}>
+              <span
+                aria-hidden="true"
+                className="mt-1.5 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-gradient-to-r from-primary to-secondary"
+              />
+              <span className="leading-relaxed">{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </article>
   );
 }
@@ -58,111 +61,151 @@ function BenefitList({
 export default function Home() {
   return (
     <main>
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-900 to-teal-700 text-white">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#22d3ee_0%,transparent_40%),radial-gradient(circle_at_80%_40%,#6366f1_0%,transparent_45%),radial-gradient(circle_at_40%_90%,#22c55e_0%,transparent_45%)]" />
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white min-h-[85vh] flex items-center">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-40 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/20 rounded-full blur-3xl animate-float" />
+          <div className="absolute top-1/3 -left-40 w-96 h-96 bg-cyan-300/20 rounded-full blur-3xl animate-float animate-delay-500" />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-pink-300/20 rounded-full blur-3xl animate-float animate-delay-1000" />
         </div>
+        
         <Container>
-          <div className="relative z-10 py-24 text-center md:py-28">
-            <p className="mb-4 inline-flex animate-fade-in rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              Launching a pro events experience
-            </p>
-            <h1 className="mx-auto mt-6 max-w-3xl animate-fade-in-up text-4xl font-bold leading-tight md:text-6xl">
-              Event management that looks premium and works lightning-fast.
+          <div className="relative z-10 py-12 text-center md:py-20">
+            <div className="inline-flex animate-slide-in-down items-center justify-center gap-2 rounded-full bg-white/15 px-4 py-1.5 backdrop-blur-md border border-white/20 mb-6">
+              <span className="h-2 w-2 rounded-full bg-cyan-300 animate-pulse" />
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
+                Premium Event Management Platform
+              </p>
+            </div>
+            
+            <h1 className="mx-auto mt-8 max-w-4xl animate-fade-in-up text-5xl md:text-7xl font-black leading-[1.1] text-balance">
+              Event management that <span className="text-cyan-200">feels premium</span> and <span className="text-yellow-200">works fast</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl animate-fade-in-up animate-delay-200 text-base leading-relaxed text-white/90 md:text-lg">
-              Build high-impact event pages, optimize attendee conversion, and run every event with a polished workflow that keeps attendees coming back.
+            
+            <p className="mx-auto mt-8 max-w-3xl animate-fade-in-up animate-delay-200 text-lg md:text-xl leading-relaxed text-white/90 text-balance font-light">
+              Create stunning event experiences, manage attendees effortlessly, and grow your community with EventHive's all-in-one platform—trusted by event creators everywhere.
             </p>
-            <div className="mt-8 flex animate-fade-in-up animate-delay-400 flex-col items-center justify-center gap-3 sm:flex-row">
+            
+            <div className="mt-10 flex animate-fade-in-up animate-delay-400 flex-col items-center justify-center gap-4 sm:flex-row sm:gap-3">
               <Link
                 href="/events"
-                className="inline-flex h-12 animate-bounce-in animate-delay-500 items-center justify-center rounded-full bg-white px-8 text-sm font-semibold text-slate-900 shadow-lg shadow-teal-300/40 transition hover:brightness-110 hover:scale-105"
+                className="group inline-flex h-14 items-center justify-center rounded-lg bg-white px-8 text-base font-bold text-indigo-600 shadow-xl shadow-indigo-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/60 hover:scale-105 active:scale-95 min-w-48"
               >
-                Explore events
+                <span className="group-hover:translate-x-1 transition-transform">Explore Events</span>
               </Link>
+              
               <Link
                 href="/organizers"
-                className="inline-flex h-12 animate-fade-in animate-delay-600 items-center justify-center rounded-full border border-white/60 bg-white/10 px-8 text-sm font-semibold text-white transition hover:bg-white/20 hover:scale-105"
+                className="group inline-flex h-14 items-center justify-center rounded-lg border-2 border-white/70 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:border-white hover:shadow-xl hover:scale-105 active:scale-95 min-w-48"
               >
-                Launch your event
+                <span className="group-hover:translate-x-1 transition-transform">Host an Event</span>
               </Link>
             </div>
+            
+            <p className="mt-8 animate-fade-in-up animate-delay-500 text-sm text-white/70">
+              ✨ Free to get started • No credit card required
+            </p>
           </div>
         </Container>
       </section>
 
-      <section className="border-b border-border/50 bg-background py-16 md:py-20">
+      {/* Features Section */}
+      <section className="relative border-b border-border/40 bg-gradient-to-b from-background to-background/50 py-20 md:py-28 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
+        
         <Container>
-          <div className="mx-auto mb-8 max-w-4xl text-center">
-            <h2 className="animate-fade-in-up font-heading text-3xl font-bold leading-tight md:text-4xl">
-              A complete event platform in one polished workspace
+          <div className="mx-auto mb-16 max-w-3xl text-center relative z-10">
+            <h2 className="animate-fade-in-up font-heading text-4xl md:text-5xl font-black leading-tight">
+              Everything you need to run <span className="text-gradient-primary">amazing events</span>
             </h2>
-            <p className="animate-fade-in-up animate-delay-200 mt-4 text-base text-muted-foreground md:text-lg">
-              EventForge combines discovery, attendee experience, and organizer operations into a single modern dashboard with enterprise-ready controls.
+            <p className="animate-fade-in-up animate-delay-200 mt-6 text-lg text-muted-foreground leading-relaxed">
+              From discovery to follow-up, manage every aspect of your events in one beautiful, powerful platform.
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3 relative z-10">
             <div className="animate-slide-in-left">
-              <BenefitList title="Attendees" points={attendeePoints} />
+              <BenefitList title="🎯 For Attendees" points={attendeePoints} />
             </div>
             <div className="animate-fade-in-up animate-delay-200">
-              <BenefitList title="Organizers" points={organizerPoints} />
+              <BenefitList title="🚀 For Organizers" points={organizerPoints} />
             </div>
             <div className="animate-slide-in-right">
-              <article className="rounded-3xl border border-border bg-card p-6 shadow-md transition hover:shadow-lg hover:scale-105 md:p-8">
-                <h3 className="font-heading text-xl font-semibold tracking-tight text-secondary">Why EventForge</h3>
-                <ul className="mt-5 space-y-3 text-sm text-muted-foreground md:text-base">
-                  <li className="flex items-start gap-3">
-                    <span aria-hidden="true" className="mt-1 h-3 w-3 rounded-full bg-primary" />
-                    Smoother event creation, from RSVP settings to attendee limits.
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span aria-hidden="true" className="mt-1 h-3 w-3 rounded-full bg-primary" />
-                    Integrated guest tracking, waitlists, and real-time status updates.
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span aria-hidden="true" className="mt-1 h-3 w-3 rounded-full bg-primary" />
-                    Fully responsive experience built for desktop and mobile in one deploy.
-                  </li>
-                </ul>
+              <article className="group rounded-2xl border border-border bg-gradient-to-br from-card to-card/80 p-6 shadow-lg card-shadow-hover transition-all md:p-8 overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <h3 className="font-heading text-xl font-bold tracking-tight text-gradient-primary">
+                    💪 Why EventHive Wins
+                  </h3>
+                  <ul className="mt-6 space-y-4 text-sm text-muted-foreground md:text-base">
+                    <li className="flex items-start gap-3">
+                      <span aria-hidden="true" className="mt-1.5 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-gradient-to-r from-primary to-secondary" />
+                      <span className="leading-relaxed">Lightning-fast event creation with AI-powered suggestions</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span aria-hidden="true" className="mt-1.5 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-gradient-to-r from-primary to-secondary" />
+                      <span className="leading-relaxed">Real-time attendee tracking & powerful waitlist management</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span aria-hidden="true" className="mt-1.5 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-gradient-to-r from-primary to-secondary" />
+                      <span className="leading-relaxed">Mobile-first design that works perfectly everywhere</span>
+                    </li>
+                  </ul>
+                </div>
               </article>
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="py-16 md:py-20">
+      {/* Analytics Section */}
+      <section className="py-20 md:py-28 relative overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full -mr-48 -mb-48 blur-3xl" />
+        
         <Container>
-          <div className="mx-auto max-w-5xl">
-            <div className="mb-8 text-center">
-              <h2 className="animate-fade-in-up font-heading text-3xl font-bold md:text-4xl">See it live</h2>
-              <p className="animate-fade-in-up animate-delay-200 mt-3 text-muted-foreground">
-                Preview your events and attendee pipelines with actionable analytics at a glance.
+          <div className="mx-auto max-w-5xl relative z-10">
+            <div className="mb-12 text-center">
+              <h2 className="animate-fade-in-up font-heading text-4xl md:text-5xl font-black">
+                See your events <span className="text-gradient-primary">truly shine</span>
+              </h2>
+              <p className="animate-fade-in-up animate-delay-200 mt-6 text-lg text-muted-foreground">
+                Beautiful analytics and actionable insights at your fingertips.
               </p>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  title: "Last 24h traffic",
+                  icon: "📊",
+                  title: "24h Traffic",
                   value: "1,290",
-                  desc: "Event page views and conversions",
+                  desc: "Event page views and qualified leads",
                 },
                 {
+                  icon: "✅",
                   title: "Active RSVPs",
                   value: "560",
-                  desc: "Confirmed attendees across all showcases",
+                  desc: "Confirmed attendees across events",
                 },
                 {
+                  icon: "🎯",
                   title: "Organizer ROI",
                   value: "+48%",
-                  desc: "Goal completion vs time invested",
+                  desc: "Goal completion vs. time invested",
                 },
               ].map((item, index) => (
-                <article key={item.title} className={`animate-fade-in-up animate-delay-${(index + 1) * 200} rounded-2xl border border-border bg-card p-5 shadow-sm transition hover:shadow-lg hover:scale-105 md:p-6`}>
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{item.title}</h3>
-                  <p className="mt-3 text-3xl font-bold text-foreground">{item.value}</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{item.desc}</p>
+                <article 
+                  key={item.title} 
+                  className={`animate-fade-in-up animate-delay-${(index + 1) * 150} group rounded-2xl border border-border bg-gradient-to-br from-card via-card/95 to-card/80 p-6 shadow-lg card-shadow-hover relative overflow-hidden transition-all duration-300`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative z-10">
+                    <div className="text-4xl mb-3">{item.icon}</div>
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{item.title}</h3>
+                    <p className="mt-4 text-5xl font-black bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent">{item.value}</p>
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
                 </article>
               ))}
             </div>
@@ -170,24 +213,31 @@ export default function Home() {
         </Container>
       </section>
 
-      <section id="faq" className="border-t border-border/70 bg-background py-16 md:py-20">
+      {/* FAQ Section */}
+      <section id="faq" className="border-t border-border/40 bg-gradient-to-b from-background/50 to-background py-20 md:py-28 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl" />
+        
         <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="animate-fade-in-up font-heading text-3xl font-bold md:text-4xl">Common Questions</h2>
-            <p className="animate-fade-in-up animate-delay-200 mt-3 text-muted-foreground">
-              Everything you need to know before launching your first event.
+          <div className="mx-auto max-w-3xl text-center mb-12 relative z-10">
+            <h2 className="animate-fade-in-up font-heading text-4xl md:text-5xl font-black">
+              Your questions <span className="text-gradient-primary">answered</span>
+            </h2>
+            <p className="animate-fade-in-up animate-delay-200 mt-6 text-lg text-muted-foreground">
+              Everything you need to know to get started.
             </p>
           </div>
-          <div className="mt-8 grid gap-4">
+          
+          <div className="mx-auto max-w-3xl space-y-3 relative z-10">
             {faqItems.map((item, index) => (
               <details
                 key={item.q}
-                className={`animate-fade-in-up animate-delay-${(index + 1) * 100} rounded-2xl border border-border bg-card p-5 transition hover:shadow-md`}
+                className={`animate-fade-in-up animate-delay-${(index + 1) * 100} group rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-primary/50 cursor-pointer`}
               >
-                <summary className="cursor-pointer text-base font-semibold">
-                  {item.q}
+                <summary className="flex items-center justify-between font-semibold text-foreground transition-colors group-hover:text-primary cursor-pointer select-none">
+                  <span>{item.q}</span>
+                  <span className="ml-4 text-primary/60 group-open:text-primary transition-colors text-xl">+</span>
                 </summary>
-                <p className="mt-3 text-sm text-muted-foreground">{item.a}</p>
+                <p className="mt-5 text-muted-foreground leading-relaxed">{item.a}</p>
               </details>
             ))}
           </div>

@@ -28,25 +28,35 @@ export default async function EventsPage({
 
   return (
     <main>
-      <section className="border-b border-border/70 bg-muted/20 py-12 md:py-16">
+      {/* Header Section */}
+      <section className="relative border-b border-border/40 bg-gradient-to-b from-indigo-600/5 to-background py-16 md:py-20 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl" />
+        
         <Container>
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-primary">Events</p>
-            <h1 className="font-heading text-4xl font-semibold tracking-tight md:text-5xl">
-              Browse events
-            </h1>
-            <p className="max-w-2xl text-muted-foreground">
-              {isOrganizer
-                ? "Manage your published events and track guest RSVPs."
-                : "Discover upcoming events and add yourself to the guest list."}
-            </p>
+          <div className="relative z-10 space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-lg bg-primary/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+              {isOrganizer ? "🎯 Your Events" : "🎪 Discover"}
+            </div>
+            
+            <div>
+              <h1 className="font-heading text-5xl md:text-6xl font-black tracking-tight text-gradient-primary">
+                {isOrganizer ? "Manage Your Events" : "Discover Amazing Events"}
+              </h1>
+              <p className="mt-4 max-w-2xl text-lg text-muted-foreground leading-relaxed">
+                {isOrganizer
+                  ? "Create, edit, and manage all your events in one place. Track RSVPs and attendee details."
+                  : "Browse events, find your next adventure, and connect with great people in your community."}
+              </p>
+            </div>
+
             {isAuthenticated && (
-              <div className="pt-2 flex flex-wrap gap-3">
+              <div className="pt-4 flex flex-wrap gap-3">
                 <Link
                   href="/events/new"
-                  className="inline-flex h-10 items-center rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm transition hover:brightness-95"
+                  className="group inline-flex h-12 items-center rounded-lg bg-gradient-to-r from-indigo-600 to-pink-500 px-6 font-bold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95"
                 >
-                  + Create event
+                  <span className="group-hover:translate-x-1 transition-transform">+ Create New Event</span>
                 </Link>
               </div>
             )}
@@ -54,67 +64,101 @@ export default async function EventsPage({
         </Container>
       </section>
 
-      <section className="py-12 md:py-16">
+      {/* Events List Section */}
+      <section className="py-16 md:py-20 relative overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -mr-48 -mb-48" />
+        
         <Container>
           {events.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-border bg-card p-8 text-center">
-              <h2 className="font-heading text-2xl font-semibold tracking-tight">
-                No events yet
+            <div className="relative z-10 rounded-2xl border border-dashed border-border bg-gradient-to-br from-card to-card/50 p-12 md:p-16 text-center">
+              <div className="text-6xl mb-4">🎪</div>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight">
+                {isAuthenticated ? "No Events Yet" : "Sign In to Browse"}
               </h2>
-              <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
+              <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground leading-relaxed">
                 {isAuthenticated
-                  ? "Create your first event and start adding guests."
-                  : "Sign in to create and manage events."}
+                  ? "Ready to create something amazing? Start by building your first event and watch the excitement grow!"
+                  : "Sign in to discover events and create your own. Join our community of event creators!"}
               </p>
               {isAuthenticated ? (
                 <Link
                   href="/events/new"
-                  className="mt-5 inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:brightness-95"
+                  className="mt-8 inline-flex h-12 items-center rounded-lg bg-gradient-to-r from-indigo-600 to-pink-500 px-8 font-bold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95"
                 >
-                  Create your first event
+                  ✨ Create Your First Event
                 </Link>
               ) : (
                 <Link
                   href="/signin"
-                  className="mt-5 inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:brightness-95"
+                  className="mt-8 inline-flex h-12 items-center rounded-lg bg-gradient-to-r from-indigo-600 to-pink-500 px-8 font-bold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95"
                 >
-                  Sign in
+                  🔐 Sign In Now
                 </Link>
               )}
             </div>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {events.map((event, index) => (
-                <Link
-                  key={event.id}
-                  href={`/events/${event.id}`}
-                  className={`group animate-fade-in-up rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:border-primary/50 hover:shadow-md hover:scale-105 animate-delay-${(index % 6 + 1) * 100}`}
-                >
-                  <h2 className="font-heading text-lg font-semibold tracking-tight group-hover:text-primary">
-                    {event.name}
-                  </h2>
-                  <div className="mt-2 flex flex-wrap gap-3 text-xs text-muted-foreground">
-                    <span>
-                      {"Date: "}
-                      {new Date(event.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </span>
-                    {event.location && <span>{"Location: "}{event.location}</span>}
-                    {event.category && <span className="capitalize">{"Category: "}{event.category}</span>}
-                  </div>
-                  {event.description && (
-                    <p className="mt-3 text-sm text-muted-foreground line-clamp-2">
-                      {event.description}
-                    </p>
-                  )}
-                  <p className="mt-4 text-xs font-semibold text-primary">
-                    View guests &rarr;
-                  </p>
-                </Link>
-              ))}
+            <div className="relative z-10">
+              <div className="mb-8 flex items-center justify-between">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">
+                  {events.length} {events.length === 1 ? "Event" : "Events"}
+                </h2>
+              </div>
+              
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {events.map((event, index) => (
+                  <Link
+                    key={event.id}
+                    href={`/events/${event.id}`}
+                    className={`group animate-fade-in-up animate-delay-${((index % 6) + 1) * 100} rounded-2xl border border-border bg-gradient-to-br from-card to-card/80 p-6 shadow-lg card-shadow-hover overflow-hidden relative transition-all duration-300`}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="relative z-10">
+                      <h3 className="font-heading text-lg font-bold tracking-tight group-hover:text-gradient-primary transition-colors line-clamp-2">
+                        {event.title}
+                      </h3>
+                      
+                      <div className="mt-4 space-y-3 text-sm">
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <span>📅</span>
+                          <span>
+                            {new Date(event.date).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+                        
+                        {event.location && (
+                          <div className="flex items-center gap-2 text-muted-foreground">
+                            <span>📍</span>
+                            <span className="line-clamp-1">{event.location}</span>
+                          </div>
+                        )}
+                        
+                        {event.category && (
+                          <div className="flex items-center gap-2">
+                            <span className="inline-flex rounded-full bg-primary/15 px-2 py-0.5 text-xs font-semibold text-primary capitalize">
+                              {event.category}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {event.description && (
+                        <p className="mt-4 text-sm text-muted-foreground line-clamp-2">
+                          {event.description}
+                        </p>
+                      )}
+                      
+                      <div className="mt-6 flex items-center text-sm font-bold text-primary group-hover:translate-x-1 transition-transform">
+                        View Event →
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
         </Container>
